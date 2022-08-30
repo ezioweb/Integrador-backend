@@ -3,5 +3,4 @@ create table if not exists endereco(
        rua varchar(100),
        numero varchar(100),
        bairro varchar(100)
-
 );
