@@ -11,11 +11,11 @@ create table if not exists paciente(
     sobrenome varchar(100),
     endereco varchar(100),
     rg varchar(100),
-    datacadastro current_timestamp()
+    datacadastro date
 );
 
 create table if not exists dentista(
-    int id auto_increment primary key,
+    id int auto_increment primary key,
     nome varchar(100),
     sobrenome varchar(100),
     matricula varchar(100)
