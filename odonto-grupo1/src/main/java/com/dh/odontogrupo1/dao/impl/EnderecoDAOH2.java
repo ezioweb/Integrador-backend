@@ -4,6 +4,7 @@ import com.dh.odontogrupo1.dao.ConfiguracaoJDBC;
 import com.dh.odontogrupo1.dao.IDao;
 import com.dh.odontogrupo1.model.Endereco;
 import org.apache.log4j.Logger;
+import org.springframework.context.annotation.Configuration;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
+@Configuration
 public class EnderecoDAOH2 implements IDao<Endereco> {
 
     private ConfiguracaoJDBC configuracaoJDBC;
