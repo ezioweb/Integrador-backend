@@ -11,7 +11,7 @@ create or replace table if not exists paciente(
     sobrenome varchar(100) not null,
     endereco varchar(100) not null,
     rg varchar(100) not null,
-    datacadastro date
+    datacadastro CURRENT_DATE
 );
 
 create or replace table if not exists dentista(
@@ -27,6 +27,6 @@ create or replace table if not exists consulta(
     id_paciente int,
     foreign key (id_dentista) references dentista(id),
     foreign key (id_paciente) references paciente(id),
-    datahoraconsulta timestamp
+    datahoraconsulta DATE
 
 );

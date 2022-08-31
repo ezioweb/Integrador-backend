@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,7 +53,34 @@ public class DentistaDAOH2 implements IDao<Dentista> {
 
     @Override
     public List<Dentista> buscarTodos() throws SQLException {
-        return null;
+        log.info("Abrindo conexão");
+
+        String SQLSelect = "SELECT * FROM dentista";
+        Connection connection;
+        Statement statement = null;
+        List<Dentista> dentistas = new ArrayList<>();
+
+        try{
+            log.info("Exibindo todos os dentistas");
+            configuracaoJDBC = new ConfiguracaoJDBC("org.h2.Driver","jdbc:h2:~/odontoclinica;INIT=RUNSCRIPT FROM 'create.sql'","sa","");
+            connection = configuracaoJDBC.getConnection();
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(SQLSelect);
+
+            while(resultSet.next()) {
+                System.out.println("[Id: " + resultSet.getInt(1)
+                        + "] [Nome: " + resultSet.getString(2)
+                        + " " + resultSet.getString(3)
+                        + "] [Matricula: " + resultSet.getString(4) + "]");
+            }
+            while (resultSet.next()) dentistas.add(criarDentista(resultSet));
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        } finally {
+            statement.close();
+        }
+        return dentistas;
     }
 
     @Override
@@ -68,5 +96,13 @@ public class DentistaDAOH2 implements IDao<Dentista> {
     @Override
     public void excluir(int id) throws SQLException {
 
+    }
+
+    private Dentista criarDentista(ResultSet resultSet) throws SQLException {
+        int id = resultSet.getInt(1);
+        String nome = resultSet.getString(2);
+        String sobrenome = resultSet.getString(3);
+        String matricula = resultSet.getString(4);
+        return new Dentista(id,nome,sobrenome,matricula);
     }
 }
