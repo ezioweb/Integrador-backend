@@ -5,6 +5,7 @@ import com.dh.odontogrupo1.dao.IDao;
 import com.dh.odontogrupo1.model.Dentista;
 import com.dh.odontogrupo1.model.Paciente;
 import org.apache.log4j.Logger;
+import org.springframework.context.annotation.Configuration;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
+@Configuration
 public class PacienteDAOH2 implements IDao<Paciente> {
 
     private ConfiguracaoJDBC configuracaoJDBC;
