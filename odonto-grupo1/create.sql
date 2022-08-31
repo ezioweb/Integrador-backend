@@ -1,27 +1,27 @@
-create table if not exists endereco(
+create or replace table if not exists endereco(
        id int auto_increment primary key,
        rua varchar(100) not null,
        numero varchar(100) not null,
        bairro varchar(100) not null
 );
 
-create table if not exists paciente(
+create or replace table if not exists paciente(
     id int auto_increment primary key,
     nome varchar(100) not null,
     sobrenome varchar(100) not null,
     endereco varchar(100) not null,
     rg varchar(100) not null,
-    datacadastro current_timestamp()
+    datacadastro date
 );
 
-create table if not exists dentista(
+create or replace table if not exists dentista(
     id int auto_increment primary key,
     nome varchar(100) not null,
     sobrenome varchar(100) not null,
     matricula varchar(100) not null
 );
 
-create table if not exists consulta(
+create or replace table if not exists consulta(
     id int auto_increment primary key,
     id_dentista int,
     id_paciente int,
