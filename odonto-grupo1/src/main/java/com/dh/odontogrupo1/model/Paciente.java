@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class Paciente {
     private int id;
     private String nome;
@@ -19,4 +20,7 @@ public class Paciente {
     private String rg;
     private LocalDate dataCadastro;
 
+    public Paciente(int id, String nome, String sobrenome, String rg){
+
+    }
 }

@@ -46,6 +46,7 @@ public class DentistaDAOH2 implements IDao<Dentista> {
             log.error("Erro ao cadastrar dentista: "+ e.getMessage());
         } finally {
             connection.close();
+            log.info("Fechando conexao");
         }
 
         return dentista;
@@ -67,36 +68,74 @@ public class DentistaDAOH2 implements IDao<Dentista> {
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sqlSelect);
 
-//            while(resultSet.next()) {
-//                System.out.println("[Id: " + resultSet.getInt(1)
-//                        + "] [Nome: " + resultSet.getString(2)
-//                        + " " + resultSet.getString(3)
-//                        + "] [Matricula: " + resultSet.getString(4) + "]");
-//            }
-
             log.debug("Buscando todos os dentistas");
             while (resultSet.next()) {
                 dentistas.add(criarDentista(resultSet));
             }
 
-
         } catch (SQLException e){
             e.printStackTrace();
+            log.error("Erro ao buscar dentistas: " + e.getMessage());
         } finally {
-            assert connection != null;
             connection.close();
+            log.info("Fechando conexao");
         }
         return dentistas;
     }
 
     @Override
     public void alterar(Dentista dentista) throws SQLException {
+        log.info("Abrindo conexao");
+        String sqlUpdate = String.format("UPDATE dentista SET matricula = '%s' where id = '%s';",
+                dentista.getMatricula(), dentista.getId());
+        Connection connection = null;
 
+        try {
+            log.info("Alterando matricula do id: " + dentista.getId());
+            configuracaoJDBC = new ConfiguracaoJDBC("org.h2.Driver","jdbc:h2:~/odontoclinica;INIT=RUNSCRIPT FROM 'create.sql'","sa","");
+            connection = configuracaoJDBC.getConnection();
+            Statement statement = connection.createStatement();
+
+            statement.execute(sqlUpdate);
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("Erro ao alterar matricula: " + e.getMessage());
+        } finally {
+            log.info("Fechando conexão");
+            connection.close();
+        }
     }
 
     @Override
     public Optional<Dentista> buscarPorId(int id) throws SQLException {
-        return Optional.empty();
+        log.debug("Abrindo uma conexão");
+        Connection connection = null;
+        Statement stmt = null;
+        String query = String.format("SELECT * FROM dentista WHERE ID = %s",id);
+        Dentista dentista = null;
+
+        try {
+            configuracaoJDBC = new ConfiguracaoJDBC("org.h2.Driver","jdbc:h2:~/odontoclinica;INIT=RUNSCRIPT FROM 'create.sql'","sa","");
+            connection = configuracaoJDBC.getConnection();
+
+            log.debug("Buscando dentista de id: " + id);
+            stmt = connection.createStatement();
+            ResultSet resultado = stmt.executeQuery(query);
+
+            while (resultado.next()) {
+                dentista = criarDentista(resultado);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            log.error("Erro ao buscar dentista: " + e.getMessage());
+        }finally {
+
+            log.debug("Fechando a conexão");
+            connection.close();
+        }
+
+        return dentista != null ? Optional.of(dentista) : Optional.empty();
     }
 
     @Override
@@ -108,11 +147,12 @@ public class DentistaDAOH2 implements IDao<Dentista> {
         try{
             configuracaoJDBC = new ConfiguracaoJDBC("org.h2.Driver","jdbc:h2:~/odontoclinica;INIT=RUNSCRIPT FROM 'create.sql'","sa","");
             conn = configuracaoJDBC.getConnection();
-            log.debug("Excluindo dentista de id: " + id);
             stmt = conn.createStatement();
             stmt.execute(sqlDelete);
+            log.debug("Excluindo dentista de id: " + id);
         } catch(SQLException e){
             e.printStackTrace();
+            log.error("Erro ao excluir dentista: " + e.getMessage());
         } finally {
             log.info("Fechando conexão");
             conn.close();

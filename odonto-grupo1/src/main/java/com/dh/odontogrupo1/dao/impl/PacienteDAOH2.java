@@ -68,12 +68,6 @@ public class PacienteDAOH2 implements IDao<Paciente> {
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(SQLSelect);
 
-            while (resultSet.next()) {
-                System.out.println("[Id: " + resultSet.getInt(1)
-                        + "] [Nome: " + resultSet.getString(2)
-                        + " " + resultSet.getString(3)
-                        + "]");
-            }
             while (resultSet.next()) pacientes.add(criarPaciente(resultSet));
 
         } catch (SQLException e) {
@@ -99,13 +93,13 @@ public class PacienteDAOH2 implements IDao<Paciente> {
 
     }
 
-    private Dentista criarPaciente(ResultSet resultSet) throws SQLException {
+    private Paciente criarPaciente(ResultSet resultSet) throws SQLException {
         int id = resultSet.getInt(1);
         String nome = resultSet.getString(2);
         String sobrenome = resultSet.getString(3);
-        String endereco = resultSet.getString(4);
+//        String endereco = resultSet.getString(4);
         String rg = resultSet.getString(5);
-        Date dataCadastro = resultSet.getDate(6);
-        return new Paciente(id, nome, sobrenome, endereco, rg, dataCadastro);
+//        Date dataCadastro = resultSet.getDate(6);
+        return new Paciente(id, nome, sobrenome, rg);
     }
 }
