@@ -9,9 +9,10 @@ create or replace table if not exists paciente(
     id int auto_increment primary key,
     nome varchar(100) not null,
     sobrenome varchar(100) not null,
-    endereco varchar(100) not null,
+    id_endereco int not null,
     rg varchar(100) not null,
-    datacadastro CURRENT_DATE
+    datacadastro DATE,
+    foreign key (id_endereco) references endereco(id)
 );
 
 create or replace table if not exists dentista(

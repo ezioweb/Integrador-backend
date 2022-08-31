@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DentistaService {
@@ -20,5 +21,17 @@ public class DentistaService {
 
     public List<Dentista> buscarTodos() throws SQLException {
         return dentistaDao.buscarTodos();
+    }
+
+    public void excluir(int id) throws SQLException {
+        dentistaDao.excluir(id);
+    }
+
+    public void atualizar(Dentista dentista) throws SQLException {
+        dentistaDao.alterar(dentista);
+    }
+
+    public Optional<Dentista> buscarPorId(int id) throws SQLException {
+        return dentistaDao.buscarPorId(id);
     }
 }
