@@ -26,8 +26,8 @@ public class PacienteService {
     public void alterar(Paciente paciente) throws SQLException {
         pacienteDaoH2.alterar(paciente);
     }
-    public void buscarPorId(int id) throws SQLException {
-        pacienteDaoH2.buscarPorId(id);
+    public Optional<Paciente> buscarPorId(int id) throws SQLException {
+        return pacienteDaoH2.buscarPorId(id);
     }
 
     public void excluir(int id) throws SQLException {
