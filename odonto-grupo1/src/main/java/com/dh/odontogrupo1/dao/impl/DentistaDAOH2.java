@@ -54,10 +54,10 @@ public class DentistaDAOH2 implements IDao<Dentista> {
     @Override
     public List<Dentista> buscarTodos() throws SQLException {
         log.info("Abrindo conexão");
-
-        String SQLSelect = "SELECT * FROM dentista";
-        Connection connection;
+        Connection connection = null;
         Statement statement = null;
+        String sqlSelect = "SELECT * FROM dentista";
+
         List<Dentista> dentistas = new ArrayList<>();
 
         try{
@@ -65,20 +65,26 @@ public class DentistaDAOH2 implements IDao<Dentista> {
             configuracaoJDBC = new ConfiguracaoJDBC("org.h2.Driver","jdbc:h2:~/odontoclinica;INIT=RUNSCRIPT FROM 'create.sql'","sa","");
             connection = configuracaoJDBC.getConnection();
             statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(SQLSelect);
+            ResultSet resultSet = statement.executeQuery(sqlSelect);
 
-            while(resultSet.next()) {
-                System.out.println("[Id: " + resultSet.getInt(1)
-                        + "] [Nome: " + resultSet.getString(2)
-                        + " " + resultSet.getString(3)
-                        + "] [Matricula: " + resultSet.getString(4) + "]");
+//            while(resultSet.next()) {
+//                System.out.println("[Id: " + resultSet.getInt(1)
+//                        + "] [Nome: " + resultSet.getString(2)
+//                        + " " + resultSet.getString(3)
+//                        + "] [Matricula: " + resultSet.getString(4) + "]");
+//            }
+
+            log.debug("Buscando todos os dentistas");
+            while (resultSet.next()) {
+                dentistas.add(criarDentista(resultSet));
             }
-            while (resultSet.next()) dentistas.add(criarDentista(resultSet));
+
 
         } catch (SQLException e){
             e.printStackTrace();
         } finally {
-            statement.close();
+            assert connection != null;
+            connection.close();
         }
         return dentistas;
     }
@@ -95,6 +101,22 @@ public class DentistaDAOH2 implements IDao<Dentista> {
 
     @Override
     public void excluir(int id) throws SQLException {
+        log.info("Abrindo Conexão");
+        Connection conn = null;
+        Statement stmt = null;
+        String sqlDelete = String.format("DELETE FROM dentista WHERE id='%s'", id);
+        try{
+            configuracaoJDBC = new ConfiguracaoJDBC("org.h2.Driver","jdbc:h2:~/odontoclinica;INIT=RUNSCRIPT FROM 'create.sql'","sa","");
+            conn = configuracaoJDBC.getConnection();
+            log.debug("Excluindo dentista de id: " + id);
+            stmt = conn.createStatement();
+            stmt.execute(sqlDelete);
+        } catch(SQLException e){
+            e.printStackTrace();
+        } finally {
+            log.info("Fechando conexão");
+            conn.close();
+        }
 
     }
 

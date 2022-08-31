@@ -23,4 +23,10 @@ public class DentistaController {
         return service.buscarTodos();
     }
 
+    @DeleteMapping
+    public void excluir(@RequestParam("id") int id) throws SQLException {
+        service.excluir(id);
+    }
+
+
 }

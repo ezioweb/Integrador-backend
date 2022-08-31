@@ -11,7 +11,7 @@ create or replace table if not exists paciente(
     sobrenome varchar(100) not null,
     endereco varchar(100) not null,
     rg varchar(100) not null,
-    datacadastro CURRENT_DATE
+    datacadastro DATE
 );
 
 create or replace table if not exists dentista(

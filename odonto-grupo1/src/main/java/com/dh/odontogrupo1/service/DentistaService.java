@@ -21,4 +21,8 @@ public class DentistaService {
     public List<Dentista> buscarTodos() throws SQLException {
         return dentistaDao.buscarTodos();
     }
+
+    public void excluir(int id) throws SQLException {
+        dentistaDao.excluir(id);
+    }
 }
