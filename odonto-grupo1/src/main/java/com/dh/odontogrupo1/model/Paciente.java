@@ -21,6 +21,9 @@ public class Paciente {
     private LocalDate dataCadastro;
 
     public Paciente(int id, String nome, String sobrenome, String rg){
-
+        this.id = id;
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.rg = rg;
     }
 }
