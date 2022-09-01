@@ -2,16 +2,21 @@ package com.dh.odontogrupo1.dao.impl;
 
 import com.dh.odontogrupo1.dao.ConfiguracaoJDBC;
 import com.dh.odontogrupo1.dao.IDao;
+import com.dh.odontogrupo1.model.Dentista;
 import com.dh.odontogrupo1.model.Paciente;
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Configuration;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
 @Configuration
 public class PacienteDAOH2 implements IDao<Paciente> {
 
@@ -78,7 +83,7 @@ public class PacienteDAOH2 implements IDao<Paciente> {
     @Override
     public void alterar(Paciente paciente) throws SQLException {
         log.info("Abrindo conexao");
-        String sqlUpdate = String.format("UPDATE dentista SET RG = '%s' where id = '%s';",
+        String sqlUpdate = String.format("UPDATE paciente SET rg = '%s' where id = '%s';",
                 paciente.getRg(), paciente.getId());
         Connection connection = null;
 
