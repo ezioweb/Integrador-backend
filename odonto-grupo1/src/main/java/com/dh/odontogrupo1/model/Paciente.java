@@ -16,7 +16,7 @@ public class Paciente {
     private int id;
     private String nome;
     private String sobrenome;
-    private Endereco endereco;
+    private int endereco;
     private String rg;
     private LocalDate dataCadastro;
 
