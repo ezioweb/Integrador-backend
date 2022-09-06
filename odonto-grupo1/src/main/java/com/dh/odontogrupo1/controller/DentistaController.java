@@ -19,6 +19,7 @@ public class DentistaController {
     DentistaService service;
     @PostMapping
     public Dentista salvarDentista(@RequestBody Dentista dentista)  {
+
         return service.salvar(dentista);
     }
 

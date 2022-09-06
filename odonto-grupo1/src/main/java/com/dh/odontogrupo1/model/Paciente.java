@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Getter
@@ -13,17 +14,16 @@ import java.time.LocalDate;
 @AllArgsConstructor
 
 public class Paciente {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nome;
     private String sobrenome;
-    private int endereco;
     private String rg;
     private LocalDate dataCadastro;
+    @OneToMany
+    @JoinColumn(name="endereco_id")
+    private Endereco endereco;
 
-    public Paciente(int id, String nome, String sobrenome, String rg){
-        this.id = id;
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.rg = rg;
-    }
+
 }

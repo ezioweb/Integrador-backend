@@ -1,8 +1,7 @@
 package com.dh.odontogrupo1.service;
 
-import com.dh.odontogrupo1.dao.IDao;
 import com.dh.odontogrupo1.model.Consulta;
-import com.dh.odontogrupo1.model.Dentista;
+import com.dh.odontogrupo1.repository.ConsultaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,25 +13,25 @@ import java.util.Optional;
 public class ConsultaService {
 
     @Autowired
-    IDao<Consulta> consultaDao;
+    ConsultaRepository repository;
 
-    public Consulta salvar(Consulta consulta) throws SQLException {
-        return consultaDao.salvar(consulta);
+    public Consulta salvar(Consulta consulta){
+        return repository.save(consulta);
     }
 
     public List<Consulta> buscarTodos() throws SQLException {
-        return consultaDao.buscarTodos();
+        return repository.findAll();
     }
 
-    public void excluir(int id) throws SQLException {
-        consultaDao.excluir(id);
+    public void excluir(Long id){
+        repository.deleteById(id);
     }
 
-    public void atualizar(Consulta consulta) throws SQLException {
-        consultaDao.alterar(consulta);
+    public Consulta atualizar(Consulta consulta){
+        return repository.save(consulta);
     }
 
-    public Optional<Consulta> buscarPorId(int id) throws SQLException {
-        return consultaDao.buscarPorId(id);
+    public Optional<Consulta> buscarPorId(Long id){
+        return repository.findById(id);
     }
 }
