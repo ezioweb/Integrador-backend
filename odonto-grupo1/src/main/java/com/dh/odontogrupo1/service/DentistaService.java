@@ -1,6 +1,6 @@
 package com.dh.odontogrupo1.service;
 
-import com.dh.odontogrupo1.dto.DentistaDTO;
+import com.dh.odontogrupo1.model.dto.DentistaDTO;
 import com.dh.odontogrupo1.model.Dentista;
 import com.dh.odontogrupo1.repository.DentistaRepository;
 import org.springframework.beans.factory.annotation.Autowired;

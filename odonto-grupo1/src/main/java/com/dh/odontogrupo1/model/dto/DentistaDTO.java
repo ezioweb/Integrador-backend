@@ -1,4 +1,4 @@
-package com.dh.odontogrupo1.dto;
+package com.dh.odontogrupo1.model.dto;
 
 import com.dh.odontogrupo1.model.Dentista;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
