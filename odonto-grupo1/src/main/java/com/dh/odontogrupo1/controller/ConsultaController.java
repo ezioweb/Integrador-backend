@@ -27,7 +27,7 @@ public class ConsultaController {
     }
 
     @DeleteMapping
-    public void excluirConsulta(@RequestParam("id") int id) throws SQLException {
+    public void excluirConsulta(@RequestParam("id") Long id) throws SQLException {
         service.excluir(id);
     }
 
@@ -37,7 +37,7 @@ public class ConsultaController {
     }
 
     @RequestMapping("/buscaid")
-    public ResponseEntity buscarConsultaPorId(@RequestParam("id") int id) throws SQLException {
+    public ResponseEntity buscarConsultaPorId(@RequestParam("id") Long id) throws SQLException {
         Optional<Consulta> consultaOptional = service.buscarPorId(id);
         if(consultaOptional.isEmpty()){
             return new ResponseEntity("Dentista não encontrado", HttpStatus.NOT_FOUND);
