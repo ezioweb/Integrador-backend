@@ -1,6 +1,6 @@
 package com.dh.odontogrupo1.dao.impl;
 
-import com.dh.odontogrupo1.dao.ConfiguracaoJDBC;
+import  com.dh.odontogrupo1.dao.ConfiguracaoJDBC;
 import com.dh.odontogrupo1.dao.IDao;
 import com.dh.odontogrupo1.model.Dentista;
 import com.dh.odontogrupo1.model.Paciente;

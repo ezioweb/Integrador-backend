@@ -13,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Consulta {
-    private int id;
+    private Long id;
     private Dentista dentista;
     private Paciente paciente;
     private Date dataHoraConsulta;
