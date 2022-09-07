@@ -19,8 +19,9 @@ public class PacienteDTO {
     private String nomePaciente;
 
     public PacienteDTO(Paciente paciente){
+
         this.nomePaciente = paciente.getNome() + " " + paciente.getSobrenome();
     }
-    }
+}
 
 

@@ -7,7 +7,7 @@ import com.dh.odontogrupo1.repository.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +18,7 @@ public class PacienteService {
     PacienteRepository repository;
 
     public Paciente salvar(Paciente paciente){
+        paciente.setDataCadastro(LocalDate.now());
         return repository.save(paciente);
     }
 

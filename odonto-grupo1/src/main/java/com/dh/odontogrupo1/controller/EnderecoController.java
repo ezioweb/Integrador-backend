@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,7 +31,7 @@ public class EnderecoController {
     }
 
     @DeleteMapping
-    public void excluirDentista(@RequestParam("id") Long id) throws SQLException{
+    public void excluirDentista(@RequestParam("id") Long id) {
         service.excluir(id);
     }
 
@@ -42,7 +41,7 @@ public class EnderecoController {
     }
 
     @RequestMapping(value = "/buscaPorId", method = RequestMethod.GET)
-    public ResponseEntity buscarEnderecoPorId(@RequestParam("id") Long id) throws SQLException{
+    public ResponseEntity buscarEnderecoPorId(@RequestParam("id") Long id){
 
         ObjectMapper mapper = new ObjectMapper();
 

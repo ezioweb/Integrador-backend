@@ -5,7 +5,6 @@ import com.dh.odontogrupo1.repository.ConsultaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +18,7 @@ public class ConsultaService {
         return repository.save(consulta);
     }
 
-    public List<Consulta> buscarTodos() throws SQLException {
+    public List<Consulta> buscarTodos() {
         return repository.findAll();
     }
 

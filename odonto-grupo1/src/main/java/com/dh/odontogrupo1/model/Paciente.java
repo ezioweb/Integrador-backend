@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
+@Entity
 public class Paciente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,9 +21,8 @@ public class Paciente {
     private String sobrenome;
     private String rg;
     private LocalDate dataCadastro;
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name="endereco_id")
     private Endereco endereco;
-
 
 }

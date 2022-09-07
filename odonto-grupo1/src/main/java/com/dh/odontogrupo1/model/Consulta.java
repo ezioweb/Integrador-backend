@@ -6,8 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -20,9 +19,10 @@ public class Consulta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @OneToOne
     private Dentista dentista;
+    @OneToOne
     private Paciente paciente;
-    private Date dataHoraConsulta;
+    private LocalDate dataHoraConsulta;
 
 }
