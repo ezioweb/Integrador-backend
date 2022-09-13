@@ -15,11 +15,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class PacienteServiceTest {
 
     @Autowired
-    PacienteService pacienteService;
+    PacienteService pacienteService = new PacienteService();
 
-    static Paciente paciente;
+    static Paciente paciente = new Paciente();
 
-    static Endereco endereco;
+    static Endereco endereco = new Endereco();
+
 
     static EnderecoService enderecoService;
 
@@ -28,11 +29,13 @@ public class PacienteServiceTest {
 
     @BeforeAll
     static void doBefore(){
+
         endereco.setRua("Avenida do Tetra");
         endereco.setBairro("Jd Brasil");
         endereco.setNumero("123");
 
         enderecoSalvo = enderecoService.salvarEndereco(endereco);
+
 
         paciente.setNome("Ayrton");
         paciente.setSobrenome("Senna");
@@ -42,7 +45,7 @@ public class PacienteServiceTest {
 
     @Test
     void salvamentoPacienteOK(){
-        Paciente pacienteSalvo = new Paciente();
+        Paciente pacienteSalvo;
 
         pacienteSalvo = pacienteService.salvar(paciente);
 

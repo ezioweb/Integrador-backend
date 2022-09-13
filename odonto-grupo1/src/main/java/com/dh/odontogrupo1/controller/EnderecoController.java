@@ -25,7 +25,10 @@ public class EnderecoController {
 
     @PostMapping
     public Endereco salvarEndereco(@RequestBody Endereco endereco) {
-        return service.salvarEndereco(endereco);
+        Endereco enderecoSalvo = service.salvarEndereco(endereco);
+        log.info("Endereço Salvo com sucesso! ");
+        log.info(enderecoSalvo);
+        return enderecoSalvo;
     }
 
     @GetMapping

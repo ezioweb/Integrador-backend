@@ -23,7 +23,7 @@ public class PacienteService {
 
     public Paciente salvar(Paciente paciente){
 
-        log.info("Salvando paciente");
+        log.info("Salvando paciente: " + paciente);
 
         paciente.setDataCadastro(LocalDate.now());
         return repository.save(paciente);
