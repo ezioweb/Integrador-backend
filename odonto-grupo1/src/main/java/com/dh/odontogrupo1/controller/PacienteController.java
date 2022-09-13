@@ -3,6 +3,7 @@ package com.dh.odontogrupo1.controller;
 import com.dh.odontogrupo1.model.Paciente;
 import com.dh.odontogrupo1.model.dto.PacienteDTO;
 import com.dh.odontogrupo1.service.PacienteService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,9 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value="/paciente")
 public class PacienteController {
+
+    final static Logger log = Logger.getLogger(PacienteController.class);
+
     @Autowired
     PacienteService service;
 
@@ -41,6 +45,7 @@ public class PacienteController {
     public ResponseEntity buscarPacientePorId(@RequestParam("id") Long id){
         Optional<Paciente> pacienteOptional = service.buscarPorId(id);
         if(pacienteOptional.isEmpty()){
+            log.error("Paciente ID:'" + id + "' não encontrado");
             return new ResponseEntity("Paciente não encontrado", HttpStatus.NOT_FOUND);
         }
         Paciente paciente = pacienteOptional.get();
