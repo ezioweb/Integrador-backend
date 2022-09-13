@@ -5,6 +5,7 @@ import com.dh.odontogrupo1.model.Endereco;
 import com.dh.odontogrupo1.model.dto.EnderecoDTO;
 import com.dh.odontogrupo1.service.EnderecoService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/endereco")
 public class EnderecoController {
+
+    final static Logger log = Logger.getLogger(EnderecoController.class);
 
     @Autowired
     EnderecoService service;
@@ -47,6 +50,7 @@ public class EnderecoController {
 
         Optional<Endereco> enderecoOptional = service.buscaPorId(id);
         if(enderecoOptional.isEmpty()){
+            log.error("Endereco ID:'" + id + "' não encontrado");
             return new ResponseEntity("Endereco nao encontrado", HttpStatus.NOT_FOUND);
         }
         Endereco endereco = enderecoOptional.get();
