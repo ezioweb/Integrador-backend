@@ -2,9 +2,9 @@ package com.dh.odontogrupo1;
 
 import com.dh.odontogrupo1.model.Endereco;
 import com.dh.odontogrupo1.model.Paciente;
+import com.dh.odontogrupo1.service.DentistaService;
 import com.dh.odontogrupo1.service.EnderecoService;
 import com.dh.odontogrupo1.service.PacienteService;
-import org.apache.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -17,11 +17,13 @@ public class PacienteServiceTest {
     @Autowired
     PacienteService pacienteService;
 
-    final static Logger log = Logger.getLogger(PacienteServiceTest.class);
-    static Paciente paciente = new Paciente();
+    static Paciente paciente;
 
-    static Endereco endereco = new Endereco();
+    static Endereco endereco;
 
+    @Autowired
+    static
+    EnderecoService enderecoService;
 
     static Endereco enderecoSalvo;
 
@@ -29,24 +31,26 @@ public class PacienteServiceTest {
     @BeforeAll
     static void doBefore(){
 
+        endereco = new Endereco();
         endereco.setRua("Avenida do Tetra");
         endereco.setBairro("Jd Brasil");
         endereco.setNumero("123");
-        log.info("Criando endereço: " + endereco);
+
+        enderecoSalvo = enderecoService.salvarEndereco(endereco);
 
 
         paciente.setNome("Ayrton");
         paciente.setSobrenome("Senna");
         paciente.setRg("123456");
-        paciente.setEndereco(endereco);
+        paciente.setEndereco(enderecoSalvo);
     }
 
     @Test
     void salvamentoPacienteOK(){
         Paciente pacienteSalvo;
-        log.info("Salvando paciente ... ");
+
         pacienteSalvo = pacienteService.salvar(paciente);
-        log.info("Paciente salvo: " + pacienteSalvo);
+
         Assertions.assertNotNull(pacienteSalvo.getId());
 
     }

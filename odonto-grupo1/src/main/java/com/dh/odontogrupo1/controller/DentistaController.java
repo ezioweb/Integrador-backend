@@ -37,7 +37,7 @@ public class DentistaController {
     }
 
     @PatchMapping
-    public void alterarMatricula(@RequestBody Dentista dentista)  {
+    public void alterarDados(@RequestBody Dentista dentista)  {
         service.atualizar(dentista);
     }
 

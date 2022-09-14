@@ -18,27 +18,27 @@ public class ConsultaController {
     @Autowired
     ConsultaService service;
     @PostMapping
-    public Consulta salvarConsulta(@RequestBody Consulta consulta) throws SQLException {
+    public Consulta salvarConsulta(@RequestBody Consulta consulta) {
         return service.salvar(consulta);
     }
 
     @GetMapping
-    public List<Consulta> buscarTodasConsultas() throws SQLException {
+    public List<Consulta> buscarTodasConsultas() {
         return service.buscarTodos();
     }
 
     @DeleteMapping
-    public void excluirConsulta(@RequestParam("id") Long id) throws SQLException {
+    public void excluirConsulta(@RequestParam("id") Long id) {
         service.excluir(id);
     }
 
     @PatchMapping
-    public void alterarConsulta(@RequestBody Consulta consulta) throws SQLException {
+    public void alterarConsulta(@RequestBody Consulta consulta) {
         service.atualizar(consulta);
     }
 
     @RequestMapping("/buscaid")
-    public ResponseEntity buscarConsultaPorId(@RequestParam("id") Long id) throws SQLException {
+    public ResponseEntity buscarConsultaPorId(@RequestParam("id") Long id) {
         Optional<Consulta> consultaOptional = service.buscarPorId(id);
         if(consultaOptional.isEmpty()){
             return new ResponseEntity("Consulta não encontrada", HttpStatus.NOT_FOUND);

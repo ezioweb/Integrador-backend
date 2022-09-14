@@ -37,7 +37,7 @@ public class PacienteController {
     }
 
     @PatchMapping
-    public void alterarRg(@RequestBody Paciente paciente){
+    public void alterarDados(@RequestBody Paciente paciente){
         service.alterar(paciente);
     }
 
