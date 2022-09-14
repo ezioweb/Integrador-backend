@@ -37,7 +37,7 @@ public class EnderecoController {
     }
 
     @DeleteMapping
-    public void excluirDentista(@RequestParam("id") Long id) {
+    public void excluirEndereco(@RequestParam("id") Long id) {
         service.excluir(id);
     }
 
