@@ -24,35 +24,43 @@ Esse projeto foi feito com Sprints pelo [Miro](https://miro.com/welcomeonboard/T
   
   ## Requests:
   
-  - Dentistas 
+- Dentistas 
     - .../dentista
-      - @Get Buscar todos 
-      - @Patch Alterar matrícula do dentista
-        - Value: ID / Nova Matrícula
-      - @Post Salvar novo dentista
+      - @Get BuscarTodosDentistas 
+      - @Post salvarDentista
         - Nome / Sobrenome / Matrícula
       - @Get Buscar Dentistas por ID
         - .../dentista/buscaid
           - Value: ID
+      - @Patch AlterarMatricula
+        - Preencher todos os valores: Nome / Sobrenome / Matrícula
       - @Delete Deletar dentista por ID
           
   - Pacientes
     - .../paciente
-      - @Get Buscar todos
-      - @Post Salvar novo paciente
+      - @Get buscarTodosPacientes
+      - @Post salvarPaciente
         - Nome / Sobrenome / RG / (Endereço - Rua / Número / Bairro)
-      - @Patch Alterar Paciente
-        - Value: ID / Nome / Sobrenome / RG
-      - @Delete Deletar paciente por ID
+      - @Patch AlterarDados
+        - Preencher todos os valores: ID / Nome / Sobrenome / RG
+      - @Delete excluirPaciente por ID
         
   - Endereço
     - .../endereco
-      - @Post Salvar endereço
+      - @Get BuscarTodosEnderecos
+      - @Post salvarEndereço
         - Value: Rua / Número / Bairro
-      - @Get Buscar todos
       - @Patch Alterar endereço 
         - Preencher todos os valores: ID / Rua / Número / Bairro
+      - @Delete Deletar endereço por Id
         
   - Consultas
+    - .../consulta
+      - @Get BuscarTodasConsultas
+      - @Post SalvarConsulta
+        - Value: Rua / Número / Bairro
+      - @Patch AlterarConsulta 
+        - Preencher todos os valores: ID / Dentista / Paciente / dataHoraConsulta
+      - @Delete ExcluirConsulta por Id
  
  
