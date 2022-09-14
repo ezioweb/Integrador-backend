@@ -36,7 +36,7 @@ Esse projeto foi feito com Sprints pelo [Miro](https://miro.com/welcomeonboard/T
         - Preencher todos os valores: Nome / Sobrenome / Matrícula
       - @Delete Deletar dentista por ID
           
-  - Pacientes
+ - Pacientes
     - .../paciente
       - @Get buscarTodosPacientes
       - @Post salvarPaciente
@@ -45,7 +45,7 @@ Esse projeto foi feito com Sprints pelo [Miro](https://miro.com/welcomeonboard/T
         - Preencher todos os valores: ID / Nome / Sobrenome / RG
       - @Delete excluirPaciente por ID
         
-  - Endereço
+ - Endereço
     - .../endereco
       - @Get BuscarTodosEnderecos
       - @Post salvarEndereço
@@ -54,7 +54,7 @@ Esse projeto foi feito com Sprints pelo [Miro](https://miro.com/welcomeonboard/T
         - Preencher todos os valores: ID / Rua / Número / Bairro
       - @Delete Deletar endereço por Id
         
-  - Consultas
+ - Consultas
     - .../consulta
       - @Get BuscarTodasConsultas
       - @Post SalvarConsulta
