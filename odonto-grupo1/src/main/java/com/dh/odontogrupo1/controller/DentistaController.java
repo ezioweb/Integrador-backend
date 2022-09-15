@@ -1,5 +1,6 @@
 package com.dh.odontogrupo1.controller;
 
+import com.dh.odontogrupo1.exception.ResourceNotFoundException;
 import com.dh.odontogrupo1.model.dto.DentistaDTO;
 import com.dh.odontogrupo1.model.Dentista;
 import com.dh.odontogrupo1.service.DentistaService;
@@ -32,7 +33,7 @@ public class DentistaController {
     }
 
     @DeleteMapping
-    public void excluirDentista(@RequestParam("id") Long id)  {
+    public void excluirDentista(@RequestParam("id") Long id) throws ResourceNotFoundException {
         service.excluir(id);
     }
 

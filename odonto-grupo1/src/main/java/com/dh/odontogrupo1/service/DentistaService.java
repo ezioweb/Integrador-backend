@@ -1,11 +1,14 @@
 package com.dh.odontogrupo1.service;
 
+import com.dh.odontogrupo1.exception.ResourceNotFoundException;
 import com.dh.odontogrupo1.model.dto.DentistaDTO;
 import com.dh.odontogrupo1.model.Dentista;
 import com.dh.odontogrupo1.repository.DentistaRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.ResourceAccessException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,10 +45,10 @@ public class DentistaService {
         return listDentistaDTO;
     }
 
-    public void excluir(Long id) {
+    public void excluir(Long id) throws ResourceNotFoundException {
+        log.info("Deletando dentista de ID: " + id);
 
-        log.info("Deletando dentista de ID: "+id);
-
+        repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("-- Erro ao tentar excluir. Id não encontrado --"));
         repository.deleteById(id);
     }
 
