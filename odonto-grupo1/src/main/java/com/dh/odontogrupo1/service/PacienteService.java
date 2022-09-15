@@ -51,7 +51,6 @@ public class PacienteService {
 
 
     public void excluir(Long id){
-
         log.info("Excluindo o paciente de ID: " + id);
 
         repository.deleteById(id);
