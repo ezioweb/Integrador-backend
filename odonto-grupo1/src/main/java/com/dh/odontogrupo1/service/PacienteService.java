@@ -1,6 +1,7 @@
 package com.dh.odontogrupo1.service;
 
 
+import com.dh.odontogrupo1.exception.ResourceNotFoundException;
 import com.dh.odontogrupo1.model.Paciente;
 import com.dh.odontogrupo1.model.dto.PacienteDTO;
 import com.dh.odontogrupo1.repository.PacienteRepository;
@@ -50,16 +51,15 @@ public class PacienteService {
     }
 
 
-    public void excluir(Long id){
+    public void excluir(Long id) throws ResourceNotFoundException {
         log.info("Excluindo o paciente de ID: " + id);
-
+        repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("-- Erro ao tentar excluir. Id não encontrado --"));
         repository.deleteById(id);
     }
 
-    public Optional<Paciente> buscarPorId(Long id){
-
+    public Optional<Paciente> buscarPorId(Long id) throws ResourceNotFoundException {
         log.info("Buscando paciente pelo id: " + id);
-
+        repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("-- Erro ao tentar encontrar paciente. Id não encontrado --"));
         return repository.findById(id);
     }
 

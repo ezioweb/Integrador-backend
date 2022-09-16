@@ -1,5 +1,5 @@
 package com.dh.odontogrupo1.controller;
-
+import com.dh.odontogrupo1.exception.ResourceNotFoundException;
 import com.dh.odontogrupo1.model.Paciente;
 import com.dh.odontogrupo1.model.dto.PacienteDTO;
 import com.dh.odontogrupo1.service.PacienteService;
@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -32,7 +31,7 @@ public class PacienteController {
     }
 
     @DeleteMapping
-    public void excluirPaciente(@RequestParam("id") Long id){
+    public void excluirPaciente(@RequestParam("id") Long id) throws ResourceNotFoundException {
         service.excluir(id);
     }
 
@@ -42,7 +41,7 @@ public class PacienteController {
     }
 
     @RequestMapping("/buscaid")
-    public ResponseEntity buscarPacientePorId(@RequestParam("id") Long id){
+    public ResponseEntity buscarPacientePorId(@RequestParam("id") Long id) throws ResourceNotFoundException {
         Optional<Paciente> pacienteOptional = service.buscarPorId(id);
         if(pacienteOptional.isEmpty()){
             log.error("Paciente ID:'" + id + "' não encontrado");
