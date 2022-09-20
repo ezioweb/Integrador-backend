@@ -1,6 +1,7 @@
 package com.dh.odontogrupo1.controller;
 
 
+import com.dh.odontogrupo1.exception.ResourceNotFoundException;
 import com.dh.odontogrupo1.model.Consulta;
 import com.dh.odontogrupo1.service.ConsultaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class ConsultaController {
     }
 
     @DeleteMapping
-    public void excluirConsulta(@RequestParam("id") Long id) {
+    public void excluirConsulta(@RequestParam("id") Long id) throws ResourceNotFoundException {
         service.excluir(id);
     }
 
@@ -38,7 +39,7 @@ public class ConsultaController {
     }
 
     @RequestMapping("/buscaid")
-    public ResponseEntity buscarConsultaPorId(@RequestParam("id") Long id) {
+    public ResponseEntity buscarConsultaPorId(@RequestParam("id") Long id) throws ResourceNotFoundException {
         Optional<Consulta> consultaOptional = service.buscarPorId(id);
         if(consultaOptional.isEmpty()){
             return new ResponseEntity("Consulta não encontrada", HttpStatus.NOT_FOUND);

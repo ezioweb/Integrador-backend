@@ -1,6 +1,7 @@
 package com.dh.odontogrupo1.controller;
 
 
+import com.dh.odontogrupo1.exception.ResourceNotFoundException;
 import com.dh.odontogrupo1.model.Endereco;
 import com.dh.odontogrupo1.model.dto.EnderecoDTO;
 import com.dh.odontogrupo1.service.EnderecoService;
@@ -37,7 +38,7 @@ public class EnderecoController {
     }
 
     @DeleteMapping
-    public void excluirEndereco(@RequestParam("id") Long id) {
+    public void excluirEndereco(@RequestParam("id") Long id) throws ResourceNotFoundException {
         service.excluir(id);
     }
 
@@ -47,7 +48,7 @@ public class EnderecoController {
     }
 
     @RequestMapping(value = "/buscaPorId", method = RequestMethod.GET)
-    public ResponseEntity buscarEnderecoPorId(@RequestParam("id") Long id){
+    public ResponseEntity buscarEnderecoPorId(@RequestParam("id") Long id) throws ResourceNotFoundException{
 
         ObjectMapper mapper = new ObjectMapper();
 
