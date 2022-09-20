@@ -4,11 +4,12 @@ import com.dh.odontogrupo1.exception.ResourceNotFoundException;
 import com.dh.odontogrupo1.model.dto.DentistaDTO;
 import com.dh.odontogrupo1.model.Dentista;
 import com.dh.odontogrupo1.repository.DentistaRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.client.ResourceAccessException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,10 +60,25 @@ public class DentistaService {
         return repository.save(dentista);
     }
 
-    public Optional<Dentista> buscarPorId(Long id) {
-
+    public Optional<Dentista> buscarPorId(Long id) throws ResourceNotFoundException {
         log.info("Buscando dentista pelo ID:" +id);
 
-        return repository.findById(id);
+//        ObjectMapper mapper = new ObjectMapper();
+//        Optional<Dentista> dentistaOptional = repository.findById(id);
+//
+//        DentistaDTO dentistaDTO = null;
+//        try {
+//            Dentista dentista = dentistaOptional.get();
+//            dentistaDTO = mapper.convertValue(dentista, DentistaDTO.class);
+//        } catch (Exception ex) {
+//            throw new ResourceNotFoundException("-- Erro ao tentar buscar dentista. Id não encontrado --");
+//        }
+//
+//        return dentistaDTO;
+
+        return Optional.ofNullable(repository.findById(id)
+                    .orElseThrow(() -> new ResourceNotFoundException("-- Erro ao tentar excluir. Id não encontrado --")));
+
+
     }
 }

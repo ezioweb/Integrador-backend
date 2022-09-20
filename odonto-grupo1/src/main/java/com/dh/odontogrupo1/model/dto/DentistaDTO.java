@@ -13,9 +13,13 @@ import lombok.Setter;
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DentistaDTO {
+
+    private Long id;
     private String nomecompleto;
 
     public DentistaDTO(Dentista dentista){
+        this.id = dentista.getId();
+
         this.nomecompleto = dentista.getNome() + " " + dentista.getSobrenome();
     }
 }

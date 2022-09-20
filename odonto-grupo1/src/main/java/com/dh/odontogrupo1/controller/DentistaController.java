@@ -3,6 +3,7 @@ import com.dh.odontogrupo1.exception.ResourceNotFoundException;
 import com.dh.odontogrupo1.model.dto.DentistaDTO;
 import com.dh.odontogrupo1.model.Dentista;
 import com.dh.odontogrupo1.service.DentistaService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/dentista")
+@CrossOrigin("*")
 public class DentistaController {
 
     final static Logger log = Logger.getLogger(DentistaController.class);
@@ -40,16 +42,21 @@ public class DentistaController {
         service.atualizar(dentista);
     }
 
-    @RequestMapping("/buscaid")
-    public ResponseEntity buscarDentistaPorId(@RequestParam("id") Long id) {
-        Optional<Dentista> dentistaOptional = service.buscarPorId(id);
-        if(dentistaOptional.isEmpty()){
-            log.error("Dentista ID:'" + id + "' não encontrado");
-            return new ResponseEntity("Dentista não encontrado", HttpStatus.NOT_FOUND);
-        }
-        Dentista dentista = dentistaOptional.get();
+    @GetMapping("/buscaid")
+    public ResponseEntity buscarDentistaPorId(@RequestParam("id") Long id) throws ResourceNotFoundException {
 
-        return new ResponseEntity(dentista, HttpStatus.OK);
+        ObjectMapper mapper = new ObjectMapper();
+        Optional<Dentista> dentistaOptional = service.buscarPorId(id);
+
+        DentistaDTO dentistaDTO = null;
+        try {
+            Dentista dentista = dentistaOptional.get();
+            dentistaDTO = mapper.convertValue(dentista, DentistaDTO.class);
+        } catch (Exception ex) {
+            throw new ResourceNotFoundException("-- Erro ao tentar buscar dentista. Id não encontrado --");
+        }
+
+        return new ResponseEntity(service.buscarPorId(id), HttpStatus.OK);
     }
 
 }

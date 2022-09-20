@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Collection;
+import java.util.List;
 
 
 @Getter
@@ -24,7 +25,7 @@ public class Usuario implements UserDetails {
     private Long id;
 
     @NotEmpty
-    @Size(min = 6)
+    @Size(min = 4)
     @Column(unique = true)
     private String username;
 
@@ -32,20 +33,15 @@ public class Usuario implements UserDetails {
     @Size(min = 6)
     private String password;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
 
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    //private List<Perfil> perfis;
+    private List<Perfil> perfis;
 
 
-
-    //@Override
-    //public Collection<? extends GrantedAuthority> getAuthorities() {
-    //    return this.perfis;
-    //}
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.perfis;
+    }
 
     @Override
     public boolean isAccountNonExpired() {
