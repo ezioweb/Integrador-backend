@@ -1,5 +1,6 @@
 package com.dh.odontogrupo1.service;
 
+import com.dh.odontogrupo1.exception.ResourceNotFoundException;
 import com.dh.odontogrupo1.model.Endereco;
 import com.dh.odontogrupo1.model.dto.EnderecoDTO;
 import com.dh.odontogrupo1.repository.EnderecoRepository;
@@ -47,14 +48,17 @@ public class EnderecoService {
         repository.save(endereco);
     }
 
-    public void excluir(Long id) {
+    public void excluir(Long id) throws ResourceNotFoundException{
+
+        repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Erro ao tentar excluir o endereço, id informado não existe"));
 
         log.info("Excluindo o endereco de id: " + id);
-
         repository.deleteById(id);
     }
 
-    public Optional<Endereco> buscaPorId(Long id) {
+    public Optional<Endereco> buscaPorId(Long id) throws ResourceNotFoundException{
+
+        repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Erro ao tentar buscar o endereço. Endereço pesquisado não encontrado"));
 
         log.info("Buscando endereco pelo id: " + id);
 

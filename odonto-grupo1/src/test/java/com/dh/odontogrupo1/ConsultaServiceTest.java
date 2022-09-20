@@ -1,5 +1,6 @@
 package com.dh.odontogrupo1;
 
+import com.dh.odontogrupo1.exception.ResourceNotFoundException;
 import com.dh.odontogrupo1.model.Consulta;
 import com.dh.odontogrupo1.service.ConsultaService;
 import org.junit.jupiter.api.Assertions;
@@ -29,7 +30,7 @@ class ConsultaServiceTest {
     }
 
     @Test
-    void deveRetornarTrueAposSalvarEBuscarConsultaPorId() {
+    void deveRetornarTrueAposSalvarEBuscarConsultaPorId() throws ResourceNotFoundException{
         consultaService.salvar(consulta);
         List<Consulta> consultas = consultaService.buscarTodos();
         Consulta primeiraConsultaNaLista = consultas.get(0);
@@ -41,7 +42,7 @@ class ConsultaServiceTest {
     }
 
     @Test
-    void deveVerificarQueAposAlterarDataEBuscarConsultaADataFoiAlterada() {
+    void deveVerificarQueAposAlterarDataEBuscarConsultaADataFoiAlterada() throws ResourceNotFoundException{
         consultaService.salvar(consulta);
         List<Consulta> consultas = consultaService.buscarTodos();
         Consulta primeiraConsultaNaLista = consultas.get(0);
@@ -66,7 +67,7 @@ class ConsultaServiceTest {
     }
 
     @Test
-    void aposSalvarEExcluirAConsultaDoIdDeveRetornarFalse() {
+    void aposSalvarEExcluirAConsultaDoIdDeveRetornarFalse() throws ResourceNotFoundException {
         consultaService.salvar(consulta);
         List<Consulta> consultas = consultaService.buscarTodos();
         Consulta primeiraConsultaNaLista = consultas.get(0);
