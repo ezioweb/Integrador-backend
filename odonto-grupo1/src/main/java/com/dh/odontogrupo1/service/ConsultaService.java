@@ -1,5 +1,6 @@
 package com.dh.odontogrupo1.service;
 
+import com.dh.odontogrupo1.exception.ResourceNotFoundException;
 import com.dh.odontogrupo1.model.Consulta;
 import com.dh.odontogrupo1.repository.ConsultaRepository;
 import org.apache.log4j.Logger;
@@ -31,7 +32,9 @@ public class ConsultaService {
         return repository.findAll();
     }
 
-    public void excluir(Long id){
+    public void excluir(Long id) throws ResourceNotFoundException {
+
+        repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Erro ao tentar excluir a consulta, id informado não existe"));
 
         log.info("Deletando a consulta de ID:" + id);
 
@@ -45,7 +48,9 @@ public class ConsultaService {
         return repository.save(consulta);
     }
 
-    public Optional<Consulta> buscarPorId(Long id){
+    public Optional<Consulta> buscarPorId(Long id) throws ResourceNotFoundException{
+
+        repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Erro ao tentar buscar consulta informada. Id consulta informado não existe."));
 
         log.info("Buscando consulta por ID: " + id);
 
