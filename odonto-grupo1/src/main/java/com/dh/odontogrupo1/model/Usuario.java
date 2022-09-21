@@ -12,7 +12,6 @@ import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.List;
 
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -32,7 +31,6 @@ public class Usuario implements UserDetails {
     @NotEmpty
     @Size(min = 6)
     private String password;
-
 
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Perfil> perfis;

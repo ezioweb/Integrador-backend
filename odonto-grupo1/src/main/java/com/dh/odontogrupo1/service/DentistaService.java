@@ -53,31 +53,20 @@ public class DentistaService {
         repository.deleteById(id);
     }
 
-    public Dentista atualizar(Dentista dentista) {
-
+    public Dentista atualizar(Dentista dentista) throws ResourceNotFoundException {
         log.info("Atualizando cadastro de Dentista");
 
+        if(buscarPorId(dentista.getId()).isEmpty()){
+            throw new ResourceNotFoundException("Dentista não encontrado para alteração");
+        }
         return repository.save(dentista);
     }
 
     public Optional<Dentista> buscarPorId(Long id) throws ResourceNotFoundException {
         log.info("Buscando dentista pelo ID:" +id);
 
-//        ObjectMapper mapper = new ObjectMapper();
-//        Optional<Dentista> dentistaOptional = repository.findById(id);
-//
-//        DentistaDTO dentistaDTO = null;
-//        try {
-//            Dentista dentista = dentistaOptional.get();
-//            dentistaDTO = mapper.convertValue(dentista, DentistaDTO.class);
-//        } catch (Exception ex) {
-//            throw new ResourceNotFoundException("-- Erro ao tentar buscar dentista. Id não encontrado --");
-//        }
-//
-//        return dentistaDTO;
-
         return Optional.ofNullable(repository.findById(id)
-                    .orElseThrow(() -> new ResourceNotFoundException("-- Erro ao tentar excluir. Id não encontrado --")));
+                    .orElseThrow(() -> new ResourceNotFoundException("-- Erro ao buscar dentista. Id não encontrado --")));
 
 
     }

@@ -50,17 +50,17 @@ public class EnderecoController {
     @RequestMapping(value = "/buscaPorId", method = RequestMethod.GET)
     public ResponseEntity buscarEnderecoPorId(@RequestParam("id") Long id) throws ResourceNotFoundException{
 
-        ObjectMapper mapper = new ObjectMapper();
+//        ObjectMapper mapper = new ObjectMapper();
+//
+//        Optional<Endereco> enderecoOptional = service.buscaPorId(id);
+//        if(enderecoOptional.isEmpty()){
+//            log.error("Endereco ID:'" + id + "' não encontrado");
+//            return new ResponseEntity("Endereco nao encontrado", HttpStatus.NOT_FOUND);
+//        }
+//        Endereco endereco = enderecoOptional.get();
+//        EnderecoDTO enderecoDTO = mapper.convertValue(endereco, EnderecoDTO.class);
 
-        Optional<Endereco> enderecoOptional = service.buscaPorId(id);
-        if(enderecoOptional.isEmpty()){
-            log.error("Endereco ID:'" + id + "' não encontrado");
-            return new ResponseEntity("Endereco nao encontrado", HttpStatus.NOT_FOUND);
-        }
-        Endereco endereco = enderecoOptional.get();
-        EnderecoDTO enderecoDTO = mapper.convertValue(endereco, EnderecoDTO.class);
-
-        return new ResponseEntity(endereco,HttpStatus.OK);
+        return new ResponseEntity(service.buscaPorId(id),HttpStatus.OK);
     }
 
 }

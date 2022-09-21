@@ -43,9 +43,13 @@ public class PacienteService {
         return listPacienteDTO;
     }
 
-    public Paciente alterar(Paciente paciente){
+    public Paciente alterar(Paciente paciente) throws ResourceNotFoundException {
 
         log.info("Atualizando Paciente");
+
+        if(buscarPorId(paciente.getId()).isEmpty()){
+            throw new ResourceNotFoundException("Paciente não encontrado para alteração");
+        }
 
         return repository.save(paciente);
     }
@@ -59,7 +63,7 @@ public class PacienteService {
 
     public Optional<Paciente> buscarPorId(Long id) throws ResourceNotFoundException {
         log.info("Buscando paciente pelo id: " + id);
-        repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("-- Erro ao tentar encontrar paciente. Id não encontrado --"));
+        repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("-- Erro ao buscar paciente. Id não encontrado --"));
         return repository.findById(id);
     }
 

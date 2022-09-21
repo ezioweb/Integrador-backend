@@ -36,17 +36,14 @@ public class PacienteController {
     }
 
     @PatchMapping
-    public void alterarDados(@RequestBody Paciente paciente){
+    public void alterarDados(@RequestBody Paciente paciente) throws ResourceNotFoundException {
         service.alterar(paciente);
     }
 
     @RequestMapping("/buscaid")
     public ResponseEntity buscarPacientePorId(@RequestParam("id") Long id) throws ResourceNotFoundException {
         Optional<Paciente> pacienteOptional = service.buscarPorId(id);
-        if(pacienteOptional.isEmpty()){
-            log.error("Paciente ID:'" + id + "' não encontrado");
-            return new ResponseEntity("Paciente não encontrado", HttpStatus.NOT_FOUND);
-        }
+
         Paciente paciente = pacienteOptional.get();
 
         return new ResponseEntity(paciente, HttpStatus.OK);

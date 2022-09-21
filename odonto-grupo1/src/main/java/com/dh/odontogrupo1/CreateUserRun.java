@@ -23,16 +23,25 @@ public class CreateUserRun implements ApplicationRunner {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         Perfil perfilAdmin = new Perfil();
-        perfilAdmin.setDescricao("ROLE_ADMIN");
+        Perfil perfilUser = new Perfil();
+        perfilAdmin.setDescricao("ADMIN");
+        perfilUser.setDescricao("USER");
         List<Perfil> listaPerfil1 = new ArrayList<>();
+        List<Perfil> listaPerfil2 = new ArrayList<>();
         listaPerfil1.add(perfilAdmin);
+        listaPerfil2.add(perfilUser);
 
         Usuario usuario1 = new Usuario();
         usuario1.setPassword(encoder.encode("123456"));
-        usuario1.setUsername("user1");
+        usuario1.setUsername("admin1");
         usuario1.setPerfis(listaPerfil1);
 
-        repository.save(usuario1);
+        Usuario usuario2 = new Usuario();
+        usuario2.setPassword(encoder.encode("654321"));
+        usuario2.setUsername("user2");
+        usuario2.setPerfis(listaPerfil2);
 
+        repository.save(usuario1);
+        repository.save(usuario2);
     }
 }

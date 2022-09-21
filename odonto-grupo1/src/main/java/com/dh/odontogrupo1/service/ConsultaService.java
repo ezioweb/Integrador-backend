@@ -50,7 +50,7 @@ public class ConsultaService {
 
     public Optional<Consulta> buscarPorId(Long id) throws ResourceNotFoundException{
 
-        repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Erro ao tentar buscar consulta informada. Id consulta informado não existe."));
+        repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Erro ao buscar consulta. Id informado não existe."));
 
         log.info("Buscando consulta por ID: " + id);
 

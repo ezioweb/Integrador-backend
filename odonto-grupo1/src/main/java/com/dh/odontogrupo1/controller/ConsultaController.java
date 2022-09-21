@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,9 +40,6 @@ public class ConsultaController {
     @RequestMapping("/buscaid")
     public ResponseEntity buscarConsultaPorId(@RequestParam("id") Long id) throws ResourceNotFoundException {
         Optional<Consulta> consultaOptional = service.buscarPorId(id);
-        if(consultaOptional.isEmpty()){
-            return new ResponseEntity("Consulta não encontrada", HttpStatus.NOT_FOUND);
-        }
         Consulta consulta = consultaOptional.get();
 
         return new ResponseEntity(consulta, HttpStatus.OK);

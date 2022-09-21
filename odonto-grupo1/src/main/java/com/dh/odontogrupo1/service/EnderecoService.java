@@ -57,11 +57,9 @@ public class EnderecoService {
     }
 
     public Optional<Endereco> buscaPorId(Long id) throws ResourceNotFoundException{
-
-        repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Erro ao tentar buscar o endereço. Endereço pesquisado não encontrado"));
-
         log.info("Buscando endereco pelo id: " + id);
+        return Optional.ofNullable(repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Erro ao tentar buscar o endereço. Endereço pesquisado não encontrado")));
 
-        return repository.findById(id);
     }
 }
