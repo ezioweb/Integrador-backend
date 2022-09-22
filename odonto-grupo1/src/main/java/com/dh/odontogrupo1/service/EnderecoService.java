@@ -20,12 +20,6 @@ public class EnderecoService {
     @Autowired
     EnderecoRepository repository;
 
-    public Endereco salvarEndereco(Endereco endereco) {
-
-        log.info("Salvando cadastro de endereco");
-
-        return repository.save(endereco);
-    }
 
     public List<EnderecoDTO> buscarTodos() {
 
@@ -41,20 +35,17 @@ public class EnderecoService {
         return listEnderecoDTO;
     }
 
-    public void alterar(Endereco endereco) {
+    public void alterar(Endereco endereco) throws ResourceNotFoundException {
 
         log.info("Atualizando endereco");
+
+        if(repository.findById(endereco.getId()).isEmpty()){
+            throw new ResourceNotFoundException("Endereço não encontrado para alteração");
+        }
 
         repository.save(endereco);
     }
 
-    public void excluir(Long id) throws ResourceNotFoundException{
-
-        repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Erro ao tentar excluir o endereço, id informado não existe"));
-
-        log.info("Excluindo o endereco de id: " + id);
-        repository.deleteById(id);
-    }
 
     public Optional<Endereco> buscaPorId(Long id) throws ResourceNotFoundException{
         log.info("Buscando endereco pelo id: " + id);

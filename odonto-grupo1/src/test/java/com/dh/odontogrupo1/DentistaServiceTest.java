@@ -1,6 +1,6 @@
 package com.dh.odontogrupo1;
 
-import com.dh.odontogrupo1.model.Consulta;
+import com.dh.odontogrupo1.exception.ResourceAlreadyExistsException;
 import com.dh.odontogrupo1.model.Dentista;
 import com.dh.odontogrupo1.service.DentistaService;
 import org.junit.jupiter.api.Assertions;
@@ -25,7 +25,7 @@ public class DentistaServiceTest {
     }
 
     @Test
-    void naoDeveRetornarNullAoSalvarDentista() {
+    void naoDeveRetornarNullAoSalvarDentista() throws ResourceAlreadyExistsException {
         Dentista dentistaSalvo = new Dentista();
         dentistaSalvo = service.salvar(dentista);
 

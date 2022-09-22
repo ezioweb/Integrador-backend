@@ -1,5 +1,6 @@
 package com.dh.odontogrupo1.service;
 
+import com.dh.odontogrupo1.exception.ResourceAlreadyExistsException;
 import com.dh.odontogrupo1.exception.ResourceNotFoundException;
 import com.dh.odontogrupo1.model.dto.DentistaDTO;
 import com.dh.odontogrupo1.model.Dentista;
@@ -23,9 +24,13 @@ public class DentistaService {
     @Autowired
     DentistaRepository repository;
 
-    public Dentista salvar(Dentista dentista){
-
+    public Dentista salvar(Dentista dentista) throws ResourceAlreadyExistsException {
         log.info("Salvando cadastro de dentista");
+
+        Dentista dentistaCadastrado = repository.findByMatricula(dentista.getMatricula());
+        if(dentistaCadastrado != null){
+            throw new ResourceAlreadyExistsException("Matricula de Dentista já cadastrado");
+        }
 
         return repository.save(dentista);
     }
@@ -56,7 +61,7 @@ public class DentistaService {
     public Dentista atualizar(Dentista dentista) throws ResourceNotFoundException {
         log.info("Atualizando cadastro de Dentista");
 
-        if(buscarPorId(dentista.getId()).isEmpty()){
+        if(repository.findById(dentista.getId()).isEmpty()){
             throw new ResourceNotFoundException("Dentista não encontrado para alteração");
         }
         return repository.save(dentista);

@@ -19,7 +19,7 @@ public class Paciente {
     private String sobrenome;
     private String rg;
     private LocalDate dataCadastro;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="endereco_id")
     private Endereco endereco;
 

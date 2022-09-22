@@ -1,7 +1,9 @@
 package com.dh.odontogrupo1.service;
 
 
+import com.dh.odontogrupo1.exception.ResourceAlreadyExistsException;
 import com.dh.odontogrupo1.exception.ResourceNotFoundException;
+import com.dh.odontogrupo1.model.Dentista;
 import com.dh.odontogrupo1.model.Paciente;
 import com.dh.odontogrupo1.model.dto.PacienteDTO;
 import com.dh.odontogrupo1.repository.PacienteRepository;
@@ -22,9 +24,13 @@ public class PacienteService {
     @Autowired
     PacienteRepository repository;
 
-    public Paciente salvar(Paciente paciente){
+    public Paciente salvar(Paciente paciente) throws ResourceAlreadyExistsException {
 
         log.info("Salvando paciente: " + paciente);
+        Paciente pacienteCadastrado = repository.findByNomeAndSobrenome(paciente.getNome(), paciente.getSobrenome());
+        if(pacienteCadastrado != null){
+            throw new ResourceAlreadyExistsException("Nome de Paciente já cadastrado");
+        }
 
         paciente.setDataCadastro(LocalDate.now());
         return repository.save(paciente);

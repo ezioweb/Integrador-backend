@@ -1,4 +1,5 @@
 package com.dh.odontogrupo1.controller;
+import com.dh.odontogrupo1.exception.ResourceAlreadyExistsException;
 import com.dh.odontogrupo1.exception.ResourceNotFoundException;
 import com.dh.odontogrupo1.model.dto.DentistaDTO;
 import com.dh.odontogrupo1.model.Dentista;
@@ -9,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/dentista")
@@ -20,13 +20,15 @@ public class DentistaController {
 
     @Autowired
     DentistaService service;
-    @PostMapping
-    public Dentista salvarDentista(@RequestBody Dentista dentista)  {
+
+//    @PostMapping
+    @RequestMapping(method = RequestMethod.POST, produces = {"application/json","application/xml"}, consumes = {"application/json","application/xml"})
+    public Dentista salvarDentista(@RequestBody Dentista dentista) throws ResourceAlreadyExistsException {
 
         return service.salvar(dentista);
     }
 
-    @GetMapping
+    @RequestMapping(method = RequestMethod.GET, produces = {"application/json","application/xml"})
     public List<DentistaDTO> buscarTodosDentistas() {
         return service.buscarTodos();
     }

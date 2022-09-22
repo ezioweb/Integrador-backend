@@ -1,4 +1,5 @@
 package com.dh.odontogrupo1.controller;
+import com.dh.odontogrupo1.exception.ResourceAlreadyExistsException;
 import com.dh.odontogrupo1.exception.ResourceNotFoundException;
 import com.dh.odontogrupo1.model.Paciente;
 import com.dh.odontogrupo1.model.dto.PacienteDTO;
@@ -21,7 +22,7 @@ public class PacienteController {
     PacienteService service;
 
     @PostMapping
-    public Paciente salvarPaciente(@RequestBody Paciente paciente){
+    public Paciente salvarPaciente(@RequestBody Paciente paciente) throws ResourceAlreadyExistsException {
         return service.salvar(paciente);
     }
 

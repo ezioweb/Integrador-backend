@@ -1,5 +1,6 @@
 package com.dh.odontogrupo1;
 
+import com.dh.odontogrupo1.exception.ResourceNotFoundException;
 import com.dh.odontogrupo1.model.Dentista;
 import com.dh.odontogrupo1.model.Endereco;
 import com.dh.odontogrupo1.service.DentistaService;
@@ -9,6 +10,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Optional;
 
 @SpringBootTest
 public class EnderecoServiceTest {
@@ -26,11 +29,11 @@ public class EnderecoServiceTest {
     }
 
     @Test
-    void naoDeveRetornarNullAoSalvarEndereco() {
-        Endereco enderecoSalvo;
-        enderecoSalvo = service.salvarEndereco(endereco);
+    void buscarEnderecoPorId() throws ResourceNotFoundException {
+        Optional<Endereco> enderecoSalvo;
+        enderecoSalvo = service.buscaPorId(endereco.getId());
 
-        Assertions.assertNotNull(enderecoSalvo.getId());
+        Assertions.assertNotNull(enderecoSalvo);
     }
 
 }

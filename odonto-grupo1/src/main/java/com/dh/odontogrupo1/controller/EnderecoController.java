@@ -24,26 +24,15 @@ public class EnderecoController {
     @Autowired
     EnderecoService service;
 
-    @PostMapping
-    public Endereco salvarEndereco(@RequestBody Endereco endereco) {
-        Endereco enderecoSalvo = service.salvarEndereco(endereco);
-        log.info("Endereço Salvo com sucesso! ");
-        log.info(enderecoSalvo);
-        return enderecoSalvo;
-    }
 
     @GetMapping
     public List<EnderecoDTO> buscarTodosEnderecos() {
         return service.buscarTodos();
     }
 
-    @DeleteMapping
-    public void excluirEndereco(@RequestParam("id") Long id) throws ResourceNotFoundException {
-        service.excluir(id);
-    }
 
     @PatchMapping
-    public void alterarEndereco(@RequestBody Endereco endereco) {
+    public void alterarEndereco(@RequestBody Endereco endereco) throws ResourceNotFoundException {
         service.alterar(endereco);
     }
 

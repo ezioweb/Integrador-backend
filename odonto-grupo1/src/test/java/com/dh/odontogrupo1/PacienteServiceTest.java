@@ -1,5 +1,6 @@
 package com.dh.odontogrupo1;
 
+import com.dh.odontogrupo1.exception.ResourceAlreadyExistsException;
 import com.dh.odontogrupo1.model.Endereco;
 import com.dh.odontogrupo1.model.Paciente;
 import com.dh.odontogrupo1.service.DentistaService;
@@ -17,15 +18,11 @@ public class PacienteServiceTest {
     @Autowired
     PacienteService pacienteService;
 
+    @Autowired
     static Paciente paciente;
 
-    static Endereco endereco;
-
     @Autowired
-    static
-    EnderecoService enderecoService;
-
-    static Endereco enderecoSalvo;
+    static Endereco endereco;
 
 
     @BeforeAll
@@ -36,17 +33,15 @@ public class PacienteServiceTest {
         endereco.setBairro("Jd Brasil");
         endereco.setNumero("123");
 
-        enderecoSalvo = enderecoService.salvarEndereco(endereco);
-
-
+        paciente = new Paciente();
         paciente.setNome("Ayrton");
         paciente.setSobrenome("Senna");
         paciente.setRg("123456");
-        paciente.setEndereco(enderecoSalvo);
+        paciente.setEndereco(endereco);
     }
 
     @Test
-    void salvamentoPacienteOK(){
+    void salvamentoPacienteOK() throws ResourceAlreadyExistsException {
         Paciente pacienteSalvo;
 
         pacienteSalvo = pacienteService.salvar(paciente);

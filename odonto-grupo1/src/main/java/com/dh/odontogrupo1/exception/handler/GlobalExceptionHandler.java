@@ -1,5 +1,6 @@
 package com.dh.odontogrupo1.exception.handler;
 
+import com.dh.odontogrupo1.exception.ResourceAlreadyExistsException;
 import com.dh.odontogrupo1.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,5 +14,11 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> processaExceptionResourceNotFound(ResourceNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
+
+    @ExceptionHandler({ResourceAlreadyExistsException.class})
+    public ResponseEntity<String> processaExceptionResourceAlreadyExists(ResourceAlreadyExistsException ex) {
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(ex.getMessage());
+    }
+
 
 }

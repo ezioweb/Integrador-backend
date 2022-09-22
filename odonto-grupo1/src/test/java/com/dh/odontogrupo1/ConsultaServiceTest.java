@@ -13,6 +13,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 @SpringBootTest
 class ConsultaServiceTest {
@@ -75,9 +77,14 @@ class ConsultaServiceTest {
 
         consultaService.excluir(id);
 
-        Optional<Consulta> consultaObtida = consultaService.buscarPorId(id);
-        Assertions.assertFalse(consultaObtida.isPresent());
+        ResourceNotFoundException exception = assertThrows(
+                ResourceNotFoundException.class, ()-> consultaService.buscarPorId(consulta.getId()));
+
+        Assertions.assertTrue(exception.getMessage().contains("Id informado"));
+
     }
+
+
 }
 
 

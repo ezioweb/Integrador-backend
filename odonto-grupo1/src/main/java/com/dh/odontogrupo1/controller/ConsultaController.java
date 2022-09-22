@@ -18,7 +18,7 @@ public class ConsultaController {
     @Autowired
     ConsultaService service;
     @PostMapping
-    public Consulta salvarConsulta(@RequestBody Consulta consulta) {
+    public Consulta salvarConsulta(@RequestBody Consulta consulta) throws ResourceNotFoundException {
         return service.salvar(consulta);
     }
 
@@ -33,7 +33,7 @@ public class ConsultaController {
     }
 
     @PatchMapping
-    public void alterarConsulta(@RequestBody Consulta consulta) {
+    public void alterarConsulta(@RequestBody Consulta consulta) throws ResourceNotFoundException {
         service.atualizar(consulta);
     }
 

@@ -2,7 +2,11 @@ package com.dh.odontogrupo1.service;
 
 import com.dh.odontogrupo1.exception.ResourceNotFoundException;
 import com.dh.odontogrupo1.model.Consulta;
+import com.dh.odontogrupo1.model.Dentista;
+import com.dh.odontogrupo1.model.Paciente;
 import com.dh.odontogrupo1.repository.ConsultaRepository;
+import com.dh.odontogrupo1.repository.DentistaRepository;
+import com.dh.odontogrupo1.repository.PacienteRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,9 +22,22 @@ public class ConsultaService {
     @Autowired
     ConsultaRepository repository;
 
-    public Consulta salvar(Consulta consulta){
+    @Autowired
+    PacienteRepository pacienteRepository;
 
+    @Autowired
+    DentistaRepository dentistaRepository;
+
+    public Consulta salvar(Consulta consulta) throws ResourceNotFoundException {
         log.info("Salvando consulta");
+        Dentista dentista = consulta.getDentista();
+        Optional<Dentista> idDentista = dentistaRepository.findById(dentista.getId());
+        Paciente paciente = consulta.getPaciente();
+        Optional<Paciente> idPaciente = pacienteRepository.findById(paciente.getId());
+
+        if(idDentista.isEmpty() || idPaciente.isEmpty()){
+            throw new ResourceNotFoundException("Paciente e/ou Dentista não encontrados");
+        }
 
         return repository.save(consulta);
     }
@@ -41,11 +58,15 @@ public class ConsultaService {
         repository.deleteById(id);
     }
 
-    public Consulta atualizar(Consulta consulta){
+    public Consulta atualizar(Consulta consulta) throws ResourceNotFoundException {
 
         log.info("Atualizando a consulta");
 
-        return repository.save(consulta);
+        if(repository.findById(consulta.getId()).isEmpty()){
+            throw new ResourceNotFoundException("Consulta não encontrada para alteração");
+        }
+
+        return salvar(consulta);
     }
 
     public Optional<Consulta> buscarPorId(Long id) throws ResourceNotFoundException{
