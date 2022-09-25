@@ -16,9 +16,13 @@ import lombok.Setter;
 
 public class PacienteDTO {
 
+    private Long id;
+
     private String nomePaciente;
 
     public PacienteDTO(Paciente paciente){
+
+        this.id = paciente.getId();
 
         this.nomePaciente = paciente.getNome() + " " + paciente.getSobrenome();
     }
