@@ -2,9 +2,7 @@ package com.dh.odontogrupo1;
 
 import com.dh.odontogrupo1.exception.ResourceAlreadyExistsException;
 import com.dh.odontogrupo1.exception.ResourceNotFoundException;
-import com.dh.odontogrupo1.model.Consulta;
 import com.dh.odontogrupo1.model.Dentista;
-import com.dh.odontogrupo1.model.Endereco;
 import com.dh.odontogrupo1.model.dto.DentistaDTO;
 import com.dh.odontogrupo1.service.DentistaService;
 import org.junit.jupiter.api.Assertions;
@@ -13,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +28,7 @@ public class DentistaServiceTest {
         dentista = new Dentista();
         dentista.setNome("Dr. Abobrinha");
         dentista.setSobrenome("Alcachofro");
-        dentista.setMatricula("54321");
+        dentista.setMatricula("33344655");
     }
 
     @Test
@@ -52,6 +49,7 @@ public class DentistaServiceTest {
 
     @Test
     void excluirDentista() throws ResourceAlreadyExistsException, ResourceNotFoundException {
+        dentista.setMatricula("8888888");
         service.salvar(dentista);
         List<DentistaDTO> dentistas = service.buscarTodos();
         DentistaDTO ultimoDentistaCadastrado = dentistas.get(dentistas.size() -1);
@@ -68,6 +66,7 @@ public class DentistaServiceTest {
 
     @Test
     void alterarDadosDentista() throws ResourceAlreadyExistsException, ResourceNotFoundException {
+        dentista.setMatricula("9090909");
         service.salvar(dentista);
         List<DentistaDTO> dentistas = service.buscarTodos();
         DentistaDTO ultimoDentistaCadastrado = dentistas.get(dentistas.size() -1);
@@ -92,7 +91,7 @@ public class DentistaServiceTest {
 
     @Test
     void buscarDentistaPorId() throws ResourceAlreadyExistsException, ResourceNotFoundException {
-
+        dentista.setMatricula("12121212");
         service.salvar(dentista);
         List<DentistaDTO> dentistas = service.buscarTodos();
         DentistaDTO ultimoDentistaCadastrado = dentistas.get(dentistas.size() -1);

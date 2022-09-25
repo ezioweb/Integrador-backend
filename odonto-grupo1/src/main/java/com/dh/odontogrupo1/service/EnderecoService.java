@@ -46,7 +46,6 @@ public class EnderecoService {
         repository.save(endereco);
     }
 
-
     public Optional<Endereco> buscaPorId(Long id) throws ResourceNotFoundException{
         log.info("Buscando endereco pelo id: " + id);
         return Optional.ofNullable(repository.findById(id)

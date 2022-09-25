@@ -5,8 +5,6 @@ import com.dh.odontogrupo1.exception.ResourceNotFoundException;
 import com.dh.odontogrupo1.model.Endereco;
 import com.dh.odontogrupo1.model.Paciente;
 import com.dh.odontogrupo1.model.dto.PacienteDTO;
-import com.dh.odontogrupo1.service.DentistaService;
-import com.dh.odontogrupo1.service.EnderecoService;
 import com.dh.odontogrupo1.service.PacienteService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -50,6 +48,7 @@ public class PacienteServiceTest {
 
     @Test
     void salvamentoPacienteOK() throws ResourceAlreadyExistsException {
+        paciente.setNome("Afranio");
         Paciente pacienteSalvo;
 
         pacienteSalvo = pacienteService.salvar(paciente);
@@ -66,6 +65,7 @@ public class PacienteServiceTest {
 
     @Test
     void excluirPaciente() throws ResourceAlreadyExistsException, ResourceNotFoundException {
+        paciente.setNome("Pitombo");
         pacienteService.salvar(paciente);
         List<PacienteDTO> pacientes = pacienteService.buscarTodos();
         PacienteDTO ultimoPacienteCadastrado = pacientes.get(pacientes.size()-1);
@@ -111,6 +111,7 @@ public class PacienteServiceTest {
 
     @Test
     void buscarPorId() throws ResourceAlreadyExistsException, ResourceNotFoundException {
+        paciente.setNome("Bigulin");
         pacienteService.salvar(paciente);
         List<PacienteDTO> pacientes = pacienteService.buscarTodos();
         PacienteDTO ultimoPacienteCadastrado = pacientes.get(pacientes.size()-1);

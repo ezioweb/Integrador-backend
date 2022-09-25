@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class OdontoGrupo1Application {
 
 	public static void main(String[] args) {
-		//teste de usar o arquivo por Gui
 		SpringApplication.run(OdontoGrupo1Application.class, args);
 	}
 

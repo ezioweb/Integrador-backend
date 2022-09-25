@@ -3,7 +3,6 @@ package com.dh.odontogrupo1.service;
 
 import com.dh.odontogrupo1.exception.ResourceAlreadyExistsException;
 import com.dh.odontogrupo1.exception.ResourceNotFoundException;
-import com.dh.odontogrupo1.model.Dentista;
 import com.dh.odontogrupo1.model.Paciente;
 import com.dh.odontogrupo1.model.dto.PacienteDTO;
 import com.dh.odontogrupo1.repository.PacienteRepository;
@@ -29,7 +28,7 @@ public class PacienteService {
         log.info("Salvando paciente: " + paciente);
         Paciente pacienteCadastrado = repository.findByNomeAndSobrenome(paciente.getNome(), paciente.getSobrenome());
         if(pacienteCadastrado != null){
-            throw new ResourceAlreadyExistsException("Nome de Paciente já cadastrado");
+            throw new ResourceAlreadyExistsException("-- Nome de Paciente já cadastrado --");
         }
 
         paciente.setDataCadastro(LocalDate.now());
@@ -54,7 +53,7 @@ public class PacienteService {
         log.info("Atualizando Paciente");
 
         if(buscarPorId(paciente.getId()).isEmpty()){
-            throw new ResourceNotFoundException("Paciente não encontrado para alteração");
+            throw new ResourceNotFoundException("-- Paciente não encontrado para alteração --");
         }
 
         return repository.save(paciente);
