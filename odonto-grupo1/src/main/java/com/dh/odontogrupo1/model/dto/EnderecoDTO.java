@@ -15,12 +15,15 @@ import lombok.Setter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 
 public class EnderecoDTO {
+    private Long id;
 
     private String rua;
     private String numero;
     private String bairro;
 
     public EnderecoDTO(Endereco endereco){
+        this.id = endereco.getId();
+
         this.rua = endereco.getRua();
         this.numero = endereco.getNumero();
         this.bairro = endereco.getBairro();
