@@ -4,6 +4,7 @@ import com.dh.odontogrupo1.exception.ResourceAlreadyExistsException;
 import com.dh.odontogrupo1.exception.ResourceNotFoundException;
 import com.dh.odontogrupo1.model.Consulta;
 import com.dh.odontogrupo1.model.Dentista;
+import com.dh.odontogrupo1.model.Endereco;
 import com.dh.odontogrupo1.model.dto.DentistaDTO;
 import com.dh.odontogrupo1.service.DentistaService;
 import org.junit.jupiter.api.Assertions;
@@ -87,7 +88,19 @@ public class DentistaServiceTest {
 
         Assertions.assertEquals(resultadoEsperado, resultadoObtido);
 
+    }
 
+    @Test
+    void buscarDentistaPorId() throws ResourceAlreadyExistsException, ResourceNotFoundException {
+
+        service.salvar(dentista);
+        List<DentistaDTO> dentistas = service.buscarTodos();
+        DentistaDTO ultimoDentistaCadastrado = dentistas.get(dentistas.size() -1);
+        Long id = ultimoDentistaCadastrado.getId();
+        Optional<Dentista> dentistaSalvo;
+        dentistaSalvo = service.buscarPorId(id);
+
+        Assertions.assertNotNull(dentistaSalvo);
     }
 
 }
