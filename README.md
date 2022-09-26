@@ -54,12 +54,11 @@ Esse projeto foi feito com Sprints pelo [Miro](https://miro.com/welcomeonboard/T
  - Endereço
     - .../endereco
       - @Get BuscarTodosEnderecos
-      - @Post salvarEndereço
-        - Value: Rua / Número / Bairro
+      - @Get BuscaPorId
+        - Preencher ID junto ao endpoint
       - @Patch Alterar endereço 
         - Preencher todos os valores: ID / Rua / Número / Bairro
-      - @Delete Deletar endereço por Id
-        
+              
  - Consultas
     - .../consulta
       - @Get BuscarTodasConsultas
