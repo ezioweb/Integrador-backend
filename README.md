@@ -1,6 +1,9 @@
 ![Odontoclinica](https://github.com/ezioweb/Integrador-backend/blob/5d35cc34bf7878987816f46715d7231f3def71da/odonto-grupo1/src/main/resources/image/Header-logo.png) 
 
 *Seu sistema completo para consultório odontológico*
+
+Esse aplicativo busca gerenciar as consultas entre pacientes e dentistas de um consultório odontológico, dando comodidade aos usuários. Como funcionalidades existentes, o sistema possui o cadastro, edição, exclusão de consultas associando paciente e dentista por horário. 
+
 # Projeto Integrador Backend 
 Alunos: Ezio Lorenzetti, Daniel Marques, Eduardo Sakamoto, Lucas Mota Barbosa da Silva, Guilherme Mello
 
