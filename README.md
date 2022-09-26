@@ -24,7 +24,7 @@ Esse projeto foi feito com Sprints pelo [Miro](https://miro.com/welcomeonboard/T
 
 ## Links externos:
 - UML do projeto [Draw.io](https://drive.google.com/file/d/1T8AZxg4sDGHIxpWgD_bPGuN7IGOnxsEE/view?usp=sharing)
-- Repositório Forntend (não integrado) [Github] (https://github.com/ezioweb/Integrador-frontend)
+- Repositório Forntend -  não integrado[Github](https://github.com/ezioweb/Integrador-frontend)
 - Layout [Layout no FIGMA](https://www.figma.com/file/NWpetzO9OMo3Nwc1IJ9a7E/Odonto-Cl%C3%ADnica?node-id=1%3A2)
 
   
