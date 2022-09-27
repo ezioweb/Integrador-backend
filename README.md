@@ -5,7 +5,7 @@
 Esse aplicativo busca gerenciar as consultas entre pacientes e dentistas de um consultório odontológico, dando comodidade aos usuários. Como funcionalidades existentes, o sistema possui o cadastro, edição, exclusão de consultas associando paciente e dentista por horário. 
 
 # Projeto Integrador Backend 
-Alunos: Ezio Lorenzetti, Daniel Marques, Eduardo Sakamoto, Lucas Mota Barbosa da Silva, Guilherme Mello
+### Alunos: Ezio Lorenzetti, Daniel Marques, Eduardo Sakamoto, Lucas Mota Barbosa da Silva, Guilherme Mello
 
 Esse projeto foi feito com Sprints pelo [Miro](https://miro.com/welcomeonboard/TEtSUEltOTB3UFBCWUhPMlNpQ0phRzRhVVNsbnF6MFkxZDdSUWE1emtSMjRMNVlqeDNOalNWTWZPQklwNzhPeHwzNDU4NzY0NTMyNDQyMTYwMTI1?share_link_id=762147440153)
 
@@ -26,6 +26,7 @@ Esse projeto foi feito com Sprints pelo [Miro](https://miro.com/welcomeonboard/T
   - Junit Jupter
 
 ## Links externos:
+- Collection do Postman [Download](https://github.com/ezioweb/Integrador-backend/blob/master/odontoclinica-postman_collection)
 - UML do projeto [Draw.io](https://drive.google.com/file/d/1T8AZxg4sDGHIxpWgD_bPGuN7IGOnxsEE/view?usp=sharing)
 - Repositório Forntend -  não integrado [Github](https://github.com/ezioweb/Integrador-frontend)
 - Layout [Layout no FIGMA](https://www.figma.com/file/NWpetzO9OMo3Nwc1IJ9a7E/Odonto-Cl%C3%ADnica?node-id=1%3A2)
